@@ -1,72 +1,40 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stddef.h>
 
 /**
- * get_print - the function resposible for handle printing.
+ * get_print - selects the right printing function.
+ * depending on the conversion specifier passed to _printf.
  *
- * @format: the string out printf treats with.
+ * @s: character hold the conversion specifier.
  *
- * @arg: the varibale argument passed to our function.
+ * Description: the function loops through the structs array
+ * func_arr[] to find matching between the specifier passed to _printf
  *
- * Description: I use flag var as an indicator as follow.
- *
- * flag = 0 --> normal character.
- * flag = 1 --> format specifier.
- * and then I process that in the next loop.
- *
- * Return: number of characters being printed.
+ * Return: A pointer.
  */
-int get_print(const char *format, va_list arg)
+int (*get_print(char s))(va_list, flags_t *)
 {
-	int flag = 0, n = 0;
+	ph func_arr[] = {
+		{'i', print_int},
+		{'s', print_string},
+		{'c', print_char},
+		{'d', print_int},
+		{'u', print_unsigned},
+		{'x', print_hex},
+		{'X', print_hex_big},
+		{'b', print_binary},
+		{'o', print_octal},
+		{'R', print_rot13},
+		{'r', print_rev},
+		{'S', print_bigS},
+		{'p', print_address},
+		{'%', print_percent}
+		};
+	int flags = 14;
 
-	if (format == NULL)
-		return (-1);
+	register int i;
 
-	while (*format)
-	{
-		if (flag == 0)
-		{
-			if (*format == '%')
-				flag = 1;
-			else
-			{
-				_putchar(*format);
-				n++;
-			}
-		}
-		else if (flag == 1)
-		{
-			switch (*format)
-			{
-				case 'c':
-					handle_char(arg, &n);
-					break;
-				case 's':
-					handle_str(arg, &n);
-					break;
-				case '%':
-					_putchar('%');
-					n++;
-					break;
-				case 'd':
-					handle_decimal_d(arg, &n);
-					break;
-				case 'i':
-					handle_decimal_d(arg, &n);
-					break;
-				default:
-					_putchar('%');
-					_putchar(*format);
-					n += 2;
-			}
-			flag = 0;
-		}
-		format++;
-	}
-	if (flag)
-		return (-1);
-
-	return (n);
+	for (i = 0; i < flags; i++)
+		if (func_arr[i].c == s)
+			return (func_arr[i].f);
+	return (NULL);
 }
