@@ -1,21 +1,22 @@
 #include "main.h"
 
 /**
- * _isdigit - checks if character is digit
- * @c: the character to check
+ * _isdigit - checks if character is digit.
+ * @c: the character to check.
  *
- * Return: 1 if digit, 0 otherwise
+ * Return: 1 if digit, 0 otherwise.
  */
+
 int _isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
 /**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
+ * _strlen - returns the length of a string.
+ * @s: the string whose length to check.
  *
- * Return: integer length of string
+ * Return: integer length of string.
  */
 int _strlen(char *s)
 {
@@ -27,12 +28,14 @@ int _strlen(char *s)
 }
 
 /**
- * print_number - prints a number with options
- * @str: the base number as a string
- * @params: the parameter struct
+ * print_number - prints a number with options.
  *
- * Return: chars printed
+ * @str: the base number as a string.
+ * @params: the parameter struct.
+ *
+ * Return: chars printed.
  */
+
 int print_number(char *str, params_t *params)
 {
 	unsigned int i = _strlen(str);

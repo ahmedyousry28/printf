@@ -1,12 +1,14 @@
 #include "main.h"
 
 /**
- * print_char - prints character
- * @ap: argument pointer
- * @params: the parameters struct
+ * print_char - prints character.
+ *
+ * @ap: the argument pointer.
+ * @params: the parameters struct.
  *
  * Return: number chars printed
  */
+
 int print_char(va_list ap, params_t *params)
 {
 	char pad_char = ' ';
@@ -90,6 +92,7 @@ int print_string(va_list ap, params_t *params)
  *
  * Return: number chars printed
  */
+
 int print_percent(va_list ap, params_t *params)
 {
 	(void)ap;
@@ -104,6 +107,7 @@ int print_percent(va_list ap, params_t *params)
  *
  * Return: number chars printed
  */
+
 int print_S(va_list ap, params_t *params)
 {
 	char *str = va_arg(ap, char *);
